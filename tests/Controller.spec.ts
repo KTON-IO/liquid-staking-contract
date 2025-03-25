@@ -1,7 +1,7 @@
 import { Blockchain,BlockchainSnapshot, createShardAccount,internal,SandboxContract,SendMessageResult,SmartContractTransaction,TreasuryContract } from "@ton/sandbox";
-import { ApproveOptions, Controller, ControllerConfig, controllerConfigToCell } from '../wrappers/Controller';
+import { Controller, controllerConfigToCell } from '../wrappers/Controller';
 import { Address, Sender, Cell, toNano, Dictionary, beginCell } from '@ton/core';
-import { keyPairFromSeed, getSecureRandomBytes, getSecureRandomWords, KeyPair } from 'ton-crypto';
+import { keyPairFromSeed, getSecureRandomBytes, getSecureRandomWords, KeyPair } from '@ton/crypto';
 import '@ton/test-utils';
 import { compile } from '@ton/blueprint';
 import { FlatTransactionComparable, randomAddress } from "@ton/test-utils";
@@ -596,7 +596,7 @@ describe('Cotroller mock', () => {
                                       reqBalance - controllerSmc.balance + toNano('1'));
 
 
-        const res = controllerSmc.receiveMessage(internal({
+        const res = await controllerSmc.receiveMessage(internal({
           from: validator.wallet.address,
           to: controller.address,
           body: Controller.requestLoanMessage(minLoan, maxLoan, interest),
@@ -938,7 +938,7 @@ describe('Cotroller mock', () => {
         const maxInterest = getRandomInt(100, 300) << 8;
         const reqLoanMsg  = Controller.requestLoanMessage(loanAmount, loanAmount, maxInterest);
         const controllerSmc = await bc.getContract(controller.address);
-        const reqRes  =  controllerSmc.receiveMessage(internal({
+        const reqRes  =  await controllerSmc.receiveMessage(internal({
           from: validator.wallet.address,
           to: controller.address,
           body: reqLoanMsg,

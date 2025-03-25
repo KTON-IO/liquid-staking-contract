@@ -2,7 +2,7 @@ import { Blockchain,BlockchainSnapshot, BlockchainTransaction, createShardAccoun
 import { Address, Cell, beginCell, toNano, Sender, Dictionary } from '@ton/core';
 import { compile } from '@ton/blueprint';
 import '@ton/test-utils';
-import { keyPairFromSeed, getSecureRandomBytes, getSecureRandomWords, KeyPair } from 'ton-crypto';
+import { keyPairFromSeed, getSecureRandomBytes, getSecureRandomWords, KeyPair } from '@ton/crypto';
 import { JettonMinter as DAOJettonMinter, jettonContentToCell } from '../contracts/jetton_dao/wrappers/JettonMinter';
 import { JettonWallet as DAOWallet } from '../wrappers/JettonWallet';
 import { Pool, PoolConfig } from '../wrappers/Pool';
@@ -21,6 +21,7 @@ import { computeMessageForwardFees, getMsgPrices } from "../fees";
 import { getRandomInt, randomAddress } from "../contracts/jetton_dao/tests/utils";
 import { PayoutCollectionConfig } from "../wrappers/PayoutNFTCollection";
 import { flattenTransaction } from "@ton/test-utils";
+import {roundMode} from "../utils";
 
 type Validator = {
   wallet: SandboxContract<TreasuryContract>,
@@ -1330,8 +1331,8 @@ describe('Integrational tests', () => {
             from: controller.address,
             to: pool.address,
             op: Op.pool.request_loan,
-            body: (x) => {x!;
-                const rs = x.beginParse().skip(64 + 32);
+            body: (x) => {
+                const rs = x!.beginParse().skip(64 + 32);
                 // That's probably too much
                 const minLoanSent = rs.loadCoins();
                 const maxLoanSent = rs.loadCoins();
@@ -2185,7 +2186,7 @@ describe('Integrational tests', () => {
                     }
                     else {
                         // Can do both
-                        actionId = getRandomInt(0, 1, 3);
+                        actionId = getRandomInt(0, 1, roundMode.round);
                     }
                 }
                 else {

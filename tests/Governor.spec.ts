@@ -1,5 +1,5 @@
 import { Blockchain, BlockchainSnapshot, BlockchainTransaction, internal, SandboxContract, TreasuryContract } from '@ton/sandbox';
-import { Address, Cell, toNano, Dictionary, beginCell, Sender, SendMode, Slice, Transaction } from '@ton/core';
+import { Address, Cell, toNano, Dictionary, beginCell, Sender, SendMode, Slice } from '@ton/core';
 import { Pool } from '../wrappers/Pool';
 import { Controller } from '../wrappers/Controller';
 import { JettonMinter as DAOJettonMinter, jettonContentToCell } from '../contracts/jetton_dao/wrappers/JettonMinter';

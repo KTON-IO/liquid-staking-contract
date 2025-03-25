@@ -1,4 +1,5 @@
-import { Address, Tuple, TupleItem, TupleItemInt, TupleReader, toNano, Cell, Slice, Sender, SenderArguments, ContractProvider, Message, beginCell, Dictionary, MessageRelaxed, Transaction, fromNano } from "@ton/core";
+import { Address, Tuple, TupleItem, TupleItemInt, TupleReader, toNano } from "@ton/ton";
+import { Cell, Slice, Sender, SenderArguments, ContractProvider, Message, beginCell, Dictionary, MessageRelaxed, Transaction, fromNano } from "@ton/core";
 import { Blockchain, BlockchainTransaction, MessageParams, SendMessageResult, SmartContract, SmartContractTransaction } from "@ton/sandbox";
 import { computeMessageForwardFees, MsgPrices } from "./fees";
 import { Op } from "./PoolConstants";
@@ -37,7 +38,7 @@ export const getRandom = (min:number, max:number) => {
     return Math.random() * (max - min) + min;
 }
 
-enum roundMode {floor, ceil, round};
+export enum roundMode {floor, ceil, round};
 
 export const getRandomInt = (min:number, max:number, mode: roundMode = roundMode.floor) => {
     let res = getRandom(min, max);

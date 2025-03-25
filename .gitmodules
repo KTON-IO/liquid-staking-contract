@@ -1,6 +1,8 @@
 [submodule "contracts/jetton_dao"]
 	path = contracts/jetton_dao
-	url = https://github.com/EmelyanenkoK/jetton_dao
+	url = https://github.com/RainBoltz/jetton_dao
+	branch = reinitable_voting_results
 [submodule "contracts/awaited_minter"]
 	path = contracts/awaited_minter
-	url = https://github.com/EmelyanenkoK/modern_jetton/
+	url = https://github.com/RainBoltz/modern_jetton
+	branch = share-distributor
