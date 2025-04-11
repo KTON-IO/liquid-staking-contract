@@ -156,7 +156,7 @@ int check_new_stake_msg(slice cs);
             if (op == elector::recover_stake_ok) {
                 ;; Note, this request will be processed even in halted state
                 state = state::REST;
-                ;; return max of borrowed_amount or borrowed_amount + profit_share * profit
+                ;; return max of borrowed_amount or principal + profit_share * profit
                 int profit = msg_value - stake_amount_sent;
                 int amount_to_return = max(borrowed_amount,
                                            muldiv(borrowed_amount, SHARE_BASIS, SHARE_BASIS + interest) +  ;; restore credit body

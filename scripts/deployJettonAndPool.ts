@@ -119,7 +119,7 @@ export async function run(provider: NetworkProvider) {
     const poolJetton = provider.open(minter);
     await poolJetton.sendDeploy(provider.sender(), toNano("0.1"));
     await provider.waitForDeploy(poolJetton.address);
-    await pool.sendDeploy(provider.sender(), toNano("3"));
+    await pool.sendDeploy(provider.sender(), toNano("11")); // 10 TON is for minimum storage fee
     await provider.waitForDeploy(pool.address);
     await poolJetton.sendChangeAdmin(provider.sender(), pool.address);
 }
