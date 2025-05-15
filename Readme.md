@@ -189,7 +189,7 @@ This expansion transforms the Halter from a simple emergency stop mechanism to a
 Refer to [launching.md](docs/launching.md) for detailed deployment instructions.
 
 ## Security Audit
-The KTON Liquid Staking Protocol V2 has undergone a comprehensive security audit, completed in April 2025. The final audit report [20250417-KTON-Final-Audit-Report.pdf](./20250417-KTON-Final-Audit-Report.pdf) is included in this repository.
+The KTON Liquid Staking Protocol V2 has undergone a comprehensive security audit, completed in April 2025. The final audit report [KTON-Final-Audit-Report-2025-5-13.pdf](./KTON-Final-Audit-Report-2025-5-13.pdf) is included in this repository.
 
 Key audit findings:
 - No critical vulnerabilities that would require immediate pool upgrade
