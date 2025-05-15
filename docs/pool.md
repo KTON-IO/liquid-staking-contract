@@ -1,4 +1,3 @@
-# WIP
 # Pool
 
 ## Storage
@@ -29,12 +28,12 @@
 - `governance_fee` - share of profit sent to governance
 
 - **Minters Data**
-  * pool jetton jetton minter address
-  * pool jetton supply
+  * KTON token minter address
+  * KTON token supply
   * Deposit Payout address
   * Deposit Payout supply == number of deposited TON in this round
   * Withdrawal Payout address
-  * Withdrawal Payout supply == number of burned pool jettons in this round
+  * Withdrawal Payout supply == number of burned KTON tokens in this round
 
 - **Roles** addresses
   * sudoer
@@ -42,6 +41,7 @@
   * interest manager
   * halter
   * approver
+  * treasury
 
 - **Codes** - code of child contracts needed either for deploy or for address authorization
   * `controller_code` - needed for controller authorization
@@ -50,6 +50,29 @@
 
 ## Deploy
 
-Pool and pool jetton minter are deployed separately. Pool deploys Payout minters and initiates them. Address of pool jetton wallet for Deposit Payout (minter) is calculated on Pool and passed to Deposit Payout in init message.
+Pool and KTON token minter are deployed separately. Pool deploys Payout minters and initiates them. Address of KTON token wallet for Deposit Payout (minter) is calculated on Pool and passed to Deposit Payout in init message.
 
 ![scheme](images/pool-scheme.png)
+
+## V2 Enhancements
+
+V2 introduced several improvements to the Pool contract:
+
+1. **Credit Timing Control**
+   - Added `credit_start_prior_elections_end` to prevent early credit issuance
+   - Made `disbalance_tolerance` configurable by governance
+
+2. **Withdrawal Fee**
+   - Added `instant_withdrawal_fee` for immediate KTON-to-TON conversions
+   - Fee accrued in pool state and added to governance fee
+
+3. **Treasury Role**
+   - Separated fee collection from interest management
+   - Provides better financial governance
+
+4. **Halter Capabilities**
+   - Can now close deposits and disable optimistic mode
+   - Cannot unilaterally re-enable these features
+
+5. **On-chain Rate Query**
+   - New `get_conversion_rate_unsafe` method for current conversion rate
