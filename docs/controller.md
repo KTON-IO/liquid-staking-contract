@@ -1,4 +1,3 @@
-# WIP
 # Validator-controller
 
 ## Storage
@@ -17,6 +16,11 @@
 3. Funds control
   - `borrowed_amount`
   - `borrowed_time`
+4. V2 Features
+  - `allocation` - maximum amount of credit that can be requested
+  - `allowed_borrow_start_prior_elections_end` - timing restriction for credit requests
+  - `approver_set_profit_share` - profit share percentage set by approver
+  - `acceptable_profit_share` - profit share percentage accepted by validator
 - state
 - approval
 
@@ -91,3 +95,26 @@ Validator sends messages to
 
 3. If Validator didn't participated in election, he must return unused load. Otherwise, anybody can `return_unused_loan` and get `STAKE_RECOVER_FINE`, in particular:
 > If controller is in "rest" state, `borrowed_amount > 0` and `utime_since > borrowed_time`, controller has enough funds on balance, anybody can trigger `return_unused_loan` and get reward
+
+## V2 Enhancements
+
+V2 introduces several improvements to the Controller contract:
+
+### Allocation and Timing Restrictions
+- `allocation`: Maximum credit limit per controller
+- `allowed_borrow_start_prior_elections_end`: Timing restrictions for credit requests
+- Provides credit prioritization capabilities for different controllers
+
+### Revenue Sharing Model
+- Added flexible profit-sharing mechanism alongside static interest
+- `approver_set_profit_share`: Profit share percentage set by approver
+- `acceptable_profit_share`: Profit share percentage accepted by validator
+- System uses the higher of static interest or revenue share
+- Protects stakeholders during periods of increased staking profitability
+
+When a controller recovers funds from the elector, it calculates:
+1. The fixed interest payment based on borrowed amount and interest rate
+2. The profit share amount based on total profit and the agreed profit share percentage
+3. Returns the higher of these two amounts to the pool
+
+This mechanism ensures that in case of drastic increase in staking profitability, the additional profits are shared with the pool (benefiting all KTON holders).
