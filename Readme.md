@@ -1,6 +1,6 @@
 # KTON Liquid Staking Protocol (V2)
 
-KTON is a decentralized liquid staking protocol connecting TON holders with hardware node operators to participate in TON Blockchain validation through asset pooling.
+KTON is a liquid staking protocol connecting TON holders with hardware node operators to participate in TON Blockchain validation through asset pooling.
 
 ## Core Participants
 
@@ -66,7 +66,7 @@ The latest documentation is available in this repository.
 │    Halter    │ │    Sudoer    │ │   Approver   │ │   Treasury   │
 │              │ │              │ │              │ │              │
 │ - Can halt   │ │ - Upgrades   │ │ - Approves   │ │ - Collects   │
-│   system     │ │   with delay │ │   controllers│ │   fees       │
+│   system     │ │              │ │   controllers│ │   fees       │
 │ - Close      │ │ - Emergency  │ │ - Sets       │ │ - Receives   │
 │   deposits   │ │   operations │ │   allocations│ │   governance │
 │              │ │              │ │   & timing   │ │   share      │
@@ -110,7 +110,6 @@ V2 introduces significant protocol improvements over V1:
 ### Architecture Changes
 - **Contract Structure**: More modular with clearer separation of concerns between components
 - **State Management**: Improved state handling with better safety checks
-- **Enhanced Security Model**: Multiple layers of authorization with time-locked operations
 
 ### Credit System Enhancements
 
@@ -136,7 +135,6 @@ V2 introduces significant protocol improvements over V1:
 SudoerExecutor is a specialized smart contract designed to enhance security in critical system operations:
 
 - **Single-Use Design**: Once executed, it cannot be used again, eliminating persistent attack vectors
-- **Time-Limited Authority**: Works in conjunction with the existing Sudoer quarantine period (typically 24-48 hours)
 - **Targeted Operations**: Can be configured to perform specific predefined actions only (such as contract upgrades)
 - **Implementation Pattern**: 
   - Deploy SudoerExecutor with precise configuration for the desired operation
@@ -200,5 +198,4 @@ Key audit findings:
 The protocol has integrated multiple security layers:
 - Strict parameter validation for all operations
 - Role-based access controls with appropriate separation of concerns
-- Time-delayed privileged operations (Sudoer mechanism)
 - Multiple governance safeguards
